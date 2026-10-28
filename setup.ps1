@@ -1,4 +1,4 @@
-# Prepara o projeto depois do clone (uma vez). Uso, na raiz do projeto:
+﻿# Prepara o projeto depois do clone (uma vez). Uso, na raiz do projeto:
 #   powershell -ExecutionPolicy Bypass -File setup.ps1
 # Pré-requisitos no PATH: PHP 8.3+, Composer, Node 20+ e Python 3.11+.
 $ErrorActionPreference = 'Stop'
@@ -35,7 +35,9 @@ if (-not (Test-Path .env)) {
     Copy-Item .env.example .env
     Rodar { php artisan key:generate --force } 'falha no key:generate'
     $token = ([guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N'))
-    (Get-Content .env) -replace '^CBM_API_TOKEN=.*$', "CBM_API_TOKEN=$token" | Set-Content .env -Encoding utf8
+    # UTF-8 sem BOM: o Set-Content do Windows PowerShell 5 gravaria um BOM no início do .env
+    $linhas = (Get-Content .env -Encoding UTF8) -replace '^CBM_API_TOKEN=.*$', "CBM_API_TOKEN=$token"
+    [IO.File]::WriteAllLines((Join-Path (Get-Location) '.env'), $linhas, (New-Object Text.UTF8Encoding $false))
     Write-Host '.env criado (token da API gerado; o coletor lê daqui)'
 } else { Write-Host '.env já existe; mantido' }
 

@@ -8,7 +8,9 @@
     <section>
         <h2 class="mb-3 text-lg font-semibold text-slate-900">{{ $g['titulo'] }}</h2>
         @if ($g['arquivos']->isEmpty())
-            <div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">Nenhum arquivo encontrado em <code>{{ config('cbm.docs_path') }}</code>.</div>
+            <div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+                Nenhum documento nesta máquina. Os manuais e planos da Motiva não vão para o repositório: copie os PDFs para a pasta
+                <code>extracted/</code> na raiz do projeto (ou aponte <code>CBM_DOCS_PATH</code> no <code>.env</code>) e recarregue.</div>
         @else
             <ul class="card divide-y divide-slate-100 !p-0">
                 @foreach ($g['arquivos'] as $a)

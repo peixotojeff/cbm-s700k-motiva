@@ -1,4 +1,4 @@
-# Sobe o serviço do modelo (porta 8001) e depois o app (porta 8000), cada um na sua janela, e abre o navegador.
+﻿# Sobe o serviço do modelo (porta 8001) e depois o app (porta 8000), cada um na sua janela, e abre o navegador.
 #   powershell -ExecutionPolicy Bypass -File iniciar.ps1
 # A ordem importa: se o app subir primeiro e a 8000 estiver ocupada, o artisan serve pega a 8001 e o painel fica sem modelo.
 $ErrorActionPreference = 'Stop'

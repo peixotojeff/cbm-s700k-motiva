@@ -17,10 +17,26 @@ src/      Python                 → base simulada (3.000 falhas + 1.500 saudáv
 
 ## Como rodar
 
-Pré-requisitos: PHP 8.3+, Composer, Node 20+, Python 3.11+.
+Pré-requisitos: PHP 8.3+, Composer, Node 20+, Python 3.11+ (todos no PATH).
+
+**Depois do clone, dois comandos** (na raiz do projeto, PowerShell):
 
 ```powershell
-# 1) Modelo (uma vez): gera a base simulada, treina e popula data/cbm.db (usado só pelo serviço do modelo; ~2 min, ~250 MB)
+powershell -ExecutionPolicy Bypass -File setup.ps1     # uma vez: venv + bibliotecas, composer, npm build, .env com token, banco do app, banco do modelo
+powershell -ExecutionPolicy Bypass -File iniciar.ps1   # sobe o modelo (8001) e o app (8000) e abre http://127.0.0.1:8000
+```
+
+O que vem no repositório para o projeto funcionar sem treinar nada:
+- `models/`: os três modelos treinados e as métricas (2,7 MB).
+- `dados/cbm.db.xz.001`, `.002`: o banco do serviço do modelo, enxuto e compactado (~92 MB em partes de até 45 MB, abaixo do limite do GitHub). Na primeira consulta, `src/db.py` o restaura em `data/cbm.db` (~10 s).
+- `web/database/data/eventos_falhas_reais.csv`: os 16 eventos reais da Motiva, importados pelo `migrate --seed`.
+
+Após retreinar, `python run_pipeline.py --empacotar` atualiza as partes em `dados/` (~2 min a mais).
+
+**Passo a passo manual** (o mesmo que os scripts fazem; para retreinar do zero):
+
+```powershell
+# 1) Modelo: gera a base simulada, treina e popula data/cbm.db (usado só pelo serviço do modelo; ~10 min, ~250 MB)
 python -m venv .venv ; .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python run_pipeline.py            # --regerar recria a base
 
@@ -30,7 +46,7 @@ python -m venv .venv ; .venv\Scripts\pip install -r requirements.txt
 # 3) Aplicação — terminal 2
 cd web
 composer install ; npm install ; npm run build
-copy .env.example .env ; php artisan key:generate
+copy .env.example .env ; php artisan key:generate   # e defina CBM_API_TOKEN no .env para a API/coletor
 php artisan migrate --seed          # cria tabelas, importa os 16 casos reais e carrega leituras de exemplo
 php artisan serve                   # http://127.0.0.1:8000
 ```
