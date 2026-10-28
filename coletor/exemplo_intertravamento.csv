@@ -1,0 +1,4 @@
+maquina;ocorrido_em;evento;observacoes
+MCH 4083 JM;2026-10-28 07:40:02;Comando de manobra;
+MCH 4083 JM;2026-10-28 07:40:09;Perda de correspondência;Detecção não confirmou a posição normal após a manobra
+MCH 4083 JM;2026-10-28 07:41:15;Comando de manobra;

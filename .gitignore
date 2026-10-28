@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Artefatos gerados pelo pipeline (python run_pipeline.py)
+data/
+models/
+
+# Material de origem (PDFs/pptx extraídos) e dados sintéticos regeneráveis
+extracted/
+raw_data/
+
+# Coletor: fila local e leituras rejeitadas
+coletor/fila.jsonl
+coletor/rejeitadas.jsonl
+coletor/fila_*.jsonl
+
+# Claude Code: preferências locais
+.claude/settings.local.json
