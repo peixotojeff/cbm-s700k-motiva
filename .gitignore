@@ -1,16 +1,16 @@
 # Python
-.venv/
+/.venv/
 __pycache__/
 *.pyc
 
 # Artefatos gerados pelo pipeline (python run_pipeline.py).
 # models/ é versionado (2,7 MB) e o banco do modelo vai compactado em dados/ (src/pacote.py); data/ é restaurado dali.
-data/
-dados/cbm_enxuto.db
+/data/
+/dados/cbm_enxuto.db
 
 # Material de origem (PDFs/pptx extraídos) e dados sintéticos regeneráveis
-extracted/
-raw_data/
+/extracted/
+/raw_data/
 
 # Coletor: fila local e leituras rejeitadas
 coletor/fila.jsonl
