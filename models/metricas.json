@@ -1,0 +1,167 @@
+{
+  "auc": 0.9324922501424611,
+  "limiar_vermelho": 0.7941816116781797,
+  "limiar_amarelo": 0.929235378854415,
+  "horizonte_aviso_ciclos": 30,
+  "alarme_falso_aviso_max": 0.2,
+  "regra_persistencia": "Liga com 2 das últimas 3 leituras acima do limiar; desliga quando as 3 ficam abaixo de 60% dele",
+  "regra_niveis": "Vermelho (intervir): risco de falha em até 2,5 dias. Amarelo (programar inspeção): risco em até 7,5 dias ou perda de correspondência recente.",
+  "alarme_falso_max": 0.1,
+  "antecedencia_max_h": 180,
+  "horizonte_ciclos": 10,
+  "intervalo_h": 6,
+  "historicos_treino": 2362,
+  "historicos_teste": 1350,
+  "acerto_modo": {
+    "atrito_travamento": 0.993,
+    "barras_folga": 0.969,
+    "embreagem_patinando": 0.967,
+    "fuso_retorno": 0.846,
+    "motor_nao_aciona": 0.935,
+    "talonada": 0.91
+  },
+  "acerto_modo_geral": 0.942,
+  "por_modo": {
+    "atrito_travamento": {
+      "casos": 274,
+      "antecipadas": 274,
+      "taxa": 1.0,
+      "antecedencia_mediana_h": 132.0
+    },
+    "barras_folga": {
+      "casos": 269,
+      "antecipadas": 268,
+      "taxa": 0.996,
+      "antecedencia_mediana_h": 102.0
+    },
+    "embreagem_patinando": {
+      "casos": 54,
+      "antecipadas": 54,
+      "taxa": 1.0,
+      "antecedencia_mediana_h": 120.0
+    },
+    "fuso_retorno": {
+      "casos": 213,
+      "antecipadas": 158,
+      "taxa": 0.742,
+      "antecedencia_mediana_h": 84.0
+    },
+    "motor_nao_aciona": {
+      "casos": 48,
+      "antecipadas": 47,
+      "taxa": 0.979,
+      "antecedencia_mediana_h": 90.0
+    },
+    "talonada": {
+      "casos": 50,
+      "antecipadas": 50,
+      "taxa": 1.0,
+      "antecedencia_mediana_h": 117.0
+    }
+  },
+  "falhas_teste": 908,
+  "falhas_antecipadas": 851,
+  "taxa_antecipacao": 0.937,
+  "antecedencia_mediana_h": 108.0,
+  "saudaveis_teste": 442,
+  "saudaveis_com_alarme": 71,
+  "taxa_alarme_falso": 0.161,
+  "trocas_status_saudaveis": 150,
+  "folga_amarelo_vermelho_h": 18.0,
+  "avisos_com_folga_reposicao": 0.0,
+  "dias_reposicao": 5,
+  "assertividade": {
+    "acertos": 851,
+    "sem_aviso": 57,
+    "falsos_aviso": 71,
+    "falsos_vermelho": 50,
+    "geral": 0.869,
+    "intervencao": 0.888
+  },
+  "calibracao": "Limiares escolhidos na validação para a maior assertividade, avisando ao menos 99% das falhas que a calibração por teto de alarme falso avisa (10% vermelho, 20% amarelo)",
+  "tolerancia_acertos": 0.01,
+  "teto_aviso_falso": {
+    "vermelho": 0.1,
+    "amarelo": 0.2
+  },
+  "saida_histerese": 0.6,
+  "limiar_amarelo_valor": 0.929235378854415,
+  "vermelho": {
+    "taxa_antecipacao": 0.91,
+    "falhas_antecipadas": 826,
+    "antecedencia_mediana_h": 90.0,
+    "taxa_alarme_falso": 0.113,
+    "saudaveis_com_alarme": 50,
+    "trocas_status_saudaveis": 107,
+    "por_modo": {
+      "atrito_travamento": 0.978,
+      "barras_folga": 0.97,
+      "embreagem_patinando": 0.981,
+      "fuso_retorno": 0.704,
+      "motor_nao_aciona": 0.979,
+      "talonada": 0.94
+    }
+  },
+  "sem_persistencia": {
+    "limiar_vermelho": 0.8773464560508728,
+    "taxa_antecipacao": 0.869,
+    "falhas_antecipadas": 789,
+    "antecedencia_mediana_h": 84.0,
+    "taxa_alarme_falso": 0.097,
+    "saudaveis_com_alarme": 43,
+    "trocas_status_saudaveis": 138
+  },
+  "features": [
+    "tempo_rel",
+    "forca_rel",
+    "isolamento_mohm",
+    "corrente_area",
+    "corrente_pico",
+    "pico_rel",
+    "corrente_patamar",
+    "corrente_rampa",
+    "tempo_mm",
+    "tempo_dp",
+    "forca_mm",
+    "forca_dp",
+    "area_mm",
+    "area_dp",
+    "isolamento_taxa",
+    "ciclos_ate_1mohm",
+    "perda_corr_janela",
+    "tipo_jacare",
+    "tempo_vs_base",
+    "forca_vs_base",
+    "area_vs_base",
+    "patamar_vs_base",
+    "rampa_vs_base",
+    "tempo_taxa",
+    "area_taxa",
+    "pico_taxa",
+    "forca_taxa",
+    "tempo_vs_base_mm20"
+  ],
+  "cenario_correspondencia": {
+    "taxa_antecipacao": 0.982,
+    "antecedencia_mediana_h": 120.0,
+    "taxa_alarme_falso": 0.145,
+    "falhas_antecipadas": 892,
+    "falhas_teste": 908,
+    "assertividade": {
+      "acertos": 892,
+      "sem_aviso": 16,
+      "falsos_aviso": 64,
+      "falsos_vermelho": 1,
+      "geral": 0.918,
+      "intervencao": 0.981
+    },
+    "por_modo": {
+      "atrito_travamento": 1.0,
+      "barras_folga": 0.996,
+      "embreagem_patinando": 0.981,
+      "fuso_retorno": 0.944,
+      "motor_nao_aciona": 0.958,
+      "talonada": 1.0
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
   python run_pipeline.py            # gera a base se raw_data/ estiver vazio
   python run_pipeline.py --regerar  # recria a base simulada (3.000 falhas + 1.500 saudáveis)
+  python run_pipeline.py --empacotar  # e atualiza a cópia compactada versionada no Git (dados/)
 """
 import json
 import sys
@@ -44,3 +45,6 @@ if __name__ == "__main__":
 
     db.construir(tele, feat, casos)
     print("SQLite:", db.DB_PATH, f"({db.DB_PATH.stat().st_size / 1e6:.0f} MB)")
+    if "--empacotar" in sys.argv:  # atualiza a cópia versionada no Git (dados/)
+        from src.pacote import empacotar
+        empacotar()

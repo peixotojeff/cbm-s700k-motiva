@@ -1,4 +1,5 @@
-"""Banco SQLite local (data/cbm.db) com a base simulada usada pelo serviço do modelo (ml/). Reconstruído a cada execução do pipeline."""
+"""Banco SQLite local (data/cbm.db) com a base simulada usada pelo serviço do modelo (ml/). Reconstruído a cada execução do pipeline.
+Num clone, vem compactado em dados/ (src/pacote.py) e é restaurado na primeira consulta."""
 import sqlite3
 from contextlib import closing
 
@@ -12,6 +13,15 @@ DB_PATH = C.DATA / "cbm.db"
 def conectar():
     C.DATA.mkdir(exist_ok=True)
     return sqlite3.connect(DB_PATH)
+
+
+def garantir() -> bool:
+    """Depois de um clone só existe a cópia compactada (dados/): restaura data/cbm.db na primeira vez que for preciso."""
+    if DB_PATH.exists():
+        return True
+    from .pacote import restaurar
+
+    return restaurar()
 
 
 def construir(tele, feat, casos):
@@ -28,5 +38,6 @@ def construir(tele, feat, casos):
 
 
 def consultar(sql: str, params=()) -> pd.DataFrame:
+    garantir()  # antes de conectar: o connect criaria um banco vazio no lugar
     with closing(conectar()) as con:
         return pd.read_sql_query(sql, con, params=params)
